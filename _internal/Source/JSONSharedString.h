@@ -82,7 +82,7 @@ public:
 		 inline bool operator <= (const iterator & other) const json_nothrow { return it <= other.it; }
 
 		 inline const_iterator & operator =(const const_iterator & orig) json_nothrow { it = orig.it; return *this; }
-		 const_iterator (const const_iterator & orig) json_nothrow : it(orig.it) {}
+		 const_iterator (const const_iterator & orig) json_nothrow : parent(orig.parent), it(orig.it) {}
 	  private:
 		 const json_shared_string * parent;
 		 const json_char * it;
@@ -135,7 +135,7 @@ public:
 		 inline bool operator <= (const iterator & other) const json_nothrow { return it <= other.it; }
 
 		 inline iterator & operator =(const iterator & orig) json_nothrow { it = orig.it; return *this; }
-		 iterator (const iterator & orig) json_nothrow : it(orig.it) {}
+		 iterator (const iterator & orig) json_nothrow : parent(orig.parent), it(orig.it) {}
 	  private:
 		 const json_shared_string * parent;
 		 const json_char * it;
