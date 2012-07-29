@@ -127,7 +127,7 @@
  *  pool.  With this option turned on, the default behavior is still done internally unless
  *  a callback is registered.  So you can have this option on and not use it.
  */
-//#define JSON_MEMORY_CALLBACKS
+#define JSON_MEMORY_CALLBACKS
 
 
 /*
@@ -135,7 +135,7 @@
  *  up memory that has been allocated by the user.  This includes strings, binary data, and
  *  nodes.  It also exposes bulk delete functions.
  */
-//#define JSON_MEMORY_MANAGE
+#define JSON_MEMORY_MANAGE
 
 
 /*
@@ -145,7 +145,7 @@
  *	should suffice for most cases.  libjson will distribute that within the pool for the best
  *	performance depending on other settings.
  */
-//#define JSON_MEMORY_POOL 524288
+#define JSON_MEMORY_POOL 524288
 
 
 /*
@@ -156,7 +156,7 @@
  *  your mutexs because of reference counting and manipulating trees, libjson automatically
  *  tracks mutex controls for you, so you only ever lock what you need to
  */
-//#define JSON_MUTEX_CALLBACKS
+#define JSON_MUTEX_CALLBACKS
 
 
 /*
@@ -185,14 +185,14 @@
  *  read and parse json, this allows it to write back out.  Changing the value of the writer
  *  changes how libjson compiles, and how fast it will go when writing
  */
-#define JSON_WRITE_PRIORITY MED
+#define JSON_WRITE_PRIORITY JSON_PRIO_MED
 
 
 /*
  *  JSON_READ_PRIORITY turns on libjson's reading capabilties.  Changing the value of the reader
  *  changes how libjson compiles, and how fast it will go when reading
  */
-#define JSON_READ_PRIORITY HIGH
+#define JSON_READ_PRIORITY JSON_PRIO_HIGH
 
 
 /*
@@ -239,7 +239,7 @@
  *  notation, or (#) if that option is on.  Some parsers do not support multiline C comments
  *  although, this option is not needed for bash comments, as they are all single line anyway
  */
-//#define JSON_WRITE_SINGLE_LINE_COMMENTS
+#define JSON_WRITE_SINGLE_LINE_COMMENTS
 
 
 /*
@@ -247,7 +247,7 @@
  *  in a write_formatted.  This is common for tuples, like coordinates.  If must be defined 
  *  as an integer
  */
-//#define JSON_ARRAY_SIZE_ON_ONE_LINE 2
+#define JSON_ARRAY_SIZE_ON_ONE_LINE 5
 
 
 /*
