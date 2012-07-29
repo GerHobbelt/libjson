@@ -27,11 +27,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="libjson_dll.vcxproj">
-      <Project>{665cb440-5086-2bed-b1b7-ceb19fc7cf8c}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="..\..\_internal\TestSuite2\JSONDebug\JSON_ASSERT.cpp" />
     <ClCompile Include="..\..\_internal\TestSuite2\JSONDebug\JSON_ASSERT_SAFE.cpp" />
     <ClCompile Include="..\..\_internal\TestSuite2\JSONDebug\JSON_FAIL.cpp" />
@@ -116,6 +111,11 @@
     <ClInclude Include="..\..\_internal\TestSuite\TestSuite.h" />
     <ClInclude Include="..\..\_internal\TestSuite\UnitTest.h" />
     <ClInclude Include="..\..\_internal\TestSuite\UStringTest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="libjson.vcxproj">
+      <Project>{4bcc46b7-cf02-6360-e268-734b31b71fbf}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>test_json</ProjectName>
