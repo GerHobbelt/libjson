@@ -38,10 +38,12 @@ stamp-h1
 build/msvc2010/bin/
 build/msvc2010/obj/
 build/msvc2010/ipch/
+build/msvc2010/out.html
 
 build/msvc2008/bin/
 build/msvc2008/obj/
 build/msvc2008/ipch/
+build/msvc2008/out.html
 
 *.suo
 *.sdf

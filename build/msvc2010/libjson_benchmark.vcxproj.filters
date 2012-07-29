@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3b3b51cc-0dd1-4641-a6e0-e2e39d5d4bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9dc71b32-a7ef-44b1-80f0-43204e1af0ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TestSuite">
+      <UniqueIdentifier>{f906333f-28c1-49f6-bbaa-73f72a893d96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TestSuite2">
+      <UniqueIdentifier>{004af3c4-d547-4879-bd8c-87a5fbb01568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc">
+      <UniqueIdentifier>{4aef5ba5-f347-4216-b68b-0625b00d8e9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\TestSuite">
+      <UniqueIdentifier>{a379073d-4b8f-45c8-9b5e-db8583bf71d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="misc\TestSuite2">
+      <UniqueIdentifier>{7e86f3c1-6466-4bd2-b7ac-1abe2e02fe4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TestSuite">
+      <UniqueIdentifier>{c2d53e2a-f701-4bcc-ba05-2454f206f4fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\TestSuite2">
+      <UniqueIdentifier>{4eb1d073-aa6a-45eb-8069-78b8ee2938fd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\_internal\TestSuite\RunTestSuite2.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestAssign.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestBinary.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestChildren.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestComments.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestConverters.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestCtors.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestEquality.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestFunctions.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestInequality.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestInspectors.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestIterators.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestMutex.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestNamespace.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestRefCounting.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestSharedString.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestStreams.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestString.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestSuite.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestValidator.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\TestWriter.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\UnitTest.cpp">
+      <Filter>Source Files\TestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSON_Base64\json_decode64.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSON_Base64\json_encode64.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONDebug\JSON_ASSERT.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONDebug\JSON_ASSERT_SAFE.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONDebug\JSON_FAIL.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONDebug\JSON_FAIL_SAFE.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONGlobals\jsonSingleton.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidArray.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidMember.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidNamedObject.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidNumber.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidObject.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidPartialRoot.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidRoot.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\isValidString.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\JSONValidator\securityTest.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\NumberToString\_areFloatsEqual.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\NumberToString\_atof.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\NumberToString\_ftoa.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\NumberToString\_itoa.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\NumberToString\_uitoa.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\NumberToString\getLenSize.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite2\NumberToString\isNumeric.cpp">
+      <Filter>Source Files\TestSuite2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_internal\TestSuite\Benchmark\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\_internal\TestSuite\Checklist.txt">
+      <Filter>misc\TestSuite</Filter>
+    </None>
+    <None Include="..\..\_internal\TestSuite\makefile">
+      <Filter>misc\TestSuite</Filter>
+    </None>
+    <None Include="..\..\_internal\TestSuite\TestSuite.1">
+      <Filter>misc\TestSuite</Filter>
+    </None>
+    <None Include="..\..\_internal\TestSuite\TestSuite2Creator.php">
+      <Filter>misc\TestSuite</Filter>
+    </None>
+    <None Include="..\..\_internal\TestSuite\Benchmark\makefile">
+      <Filter>misc</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\_internal\TestSuite\RunTestSuite2.h">
+      <Filter>Header Files\TestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite\StringTest.h">
+      <Filter>Header Files\TestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite\TestSuite.h">
+      <Filter>Header Files\TestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite\UnitTest.h">
+      <Filter>Header Files\TestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite\UStringTest.h">
+      <Filter>Header Files\TestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\BaseTest.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSON_Base64\json_decode64.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSON_Base64\json_encode64.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\NumberToString\_areFloatsEqual.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\NumberToString\_atof.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\NumberToString\_ftoa.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\NumberToString\_itoa.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\NumberToString\_uitoa.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\NumberToString\getLenSize.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\NumberToString\isNumeric.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidArray.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidMember.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidNamedObject.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidNumber.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidObject.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidPartialRoot.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidRoot.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\isValidString.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONDebug\JSON_ASSERT.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONDebug\JSON_ASSERT_SAFE.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONDebug\JSON_FAIL.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONDebug\JSON_FAIL_SAFE.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONGlobals\jsonSingleton.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\securityTest.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_internal\TestSuite2\JSONValidator\Resources\validyMacros.h">
+      <Filter>Header Files\TestSuite2</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
