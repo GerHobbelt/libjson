@@ -23,7 +23,7 @@ using namespace std;
 #endif
 
 #ifdef JSON_DEBUG
-#error, JSON_DEBUG on
+#pragma message("#error, JSON_DEBUG on")
 #endif
 
 #ifdef JSON_ISO_STRICT
@@ -75,15 +75,15 @@ using namespace std;
 #endif
 
 #ifdef JSON_MEMORY_CALLBACKS
-#error, JSON_MEMORY_CALLBACKS on
+#pragma message("#error, JSON_MEMORY_CALLBACKS on")
 #endif
 
 #ifdef JSON_MEMORY_MANAGE
-#error, JSON_MEMORY_MANAGE on
+#pragma message("#error, JSON_MEMORY_MANAGE on")
 #endif
 
 #ifdef JSON_MUTEX_CALLBACKS
-#error, JSON_MUTEX_CALLBACKS on
+#pragma message("#error, JSON_MUTEX_CALLBACKS on")
 #endif
 
 #ifdef JSON_MUTEX_MANAGE
@@ -98,11 +98,11 @@ using namespace std;
 #error, JSON_OCTAL on
 #endif
 
-#if (JSON_READ_PRIORITY != HIGH)
+#if (JSON_READ_PRIORITY != JSON_PRIO_HIGH)
 #error JSON_READ_PRIORITY not high
 #endif
 
-#if (JSON_WRITE_PRIORITY != MED)
+#if (JSON_WRITE_PRIORITY != JSON_PRIO_MED)
 #error JSON_WRITE_PRIORITY not med
 #endif
 
@@ -127,7 +127,7 @@ using namespace std;
 #endif
 
 #ifdef JSON_WRITE_SINGLE_LINE_COMMENTS
-#error, JSON_WRITE_SINGLE_LINE_COMMENTS on
+#pragma message("#error, JSON_WRITE_SINGLE_LINE_COMMENTS on")
 #endif
 
 #ifdef JSON_ARRAY_ON_ONE_LINE
@@ -179,7 +179,7 @@ using namespace std;
 #endif
 
 #ifdef JSON_MEMORY_POOL
-#error JSON_MEMORY_POOL is on
+#pragma message("#error JSON_MEMORY_POOL is on")
 #endif
 
 #ifdef JSON_UNIT_TEST
