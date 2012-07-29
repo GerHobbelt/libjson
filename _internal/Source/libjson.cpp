@@ -26,7 +26,12 @@
 
 	#ifdef JSON_MEMORY_POOL
 		#include "JSONMemoryPool.h"
-		extern memory_pool<NODEPOOL> json_node_mempool;
+
+		// http://www.parashift.com/c++-faq-lite/static-init-order.html (sections 10.14 - 10.17)
+		typedef memory_pool<NODEPOOL> json_node_mempool_t;
+		json_node_mempool_t &json_node_mempool_f();
+		#define json_node_mempool         json_node_mempool_f()
+		// ~ extern memory_pool<NODEPOOL> json_node_mempool;
 	#endif
 
     inline json_char * toCString(const json_string & str) json_nothrow {
@@ -37,7 +42,7 @@
 		  return (json_char *)std::memcpy(json_malloc<json_char>(len), str.c_str(), len);
 	   #endif
     }
-	
+
 	inline json_char * alreadyCString(json_char * str) json_nothrow {
 		#ifdef JSON_MEMORY_MANAGE
 		   return (json_char *)json_global(STRING_HANDLER).insert(str);

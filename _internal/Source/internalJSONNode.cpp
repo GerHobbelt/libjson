@@ -66,7 +66,7 @@ internalJSONNode::internalJSONNode(const json_string & unparsed) json_nothrow : 
     }
 }
 
-#ifndef JSON_STRICT 
+#ifndef JSON_STRICT
     #define LETTERCASE(x, y)\
 	   case JSON_TEXT(x):\
 	   case JSON_TEXT(y)
@@ -86,7 +86,7 @@ internalJSONNode::internalJSONNode(const json_string & name_t, const json_string
 
     #ifdef JSON_STRICT
 	   JSON_ASSERT_SAFE(!value_t.empty(), JSON_TEXT("empty node"), Nullify(); return;);
-    #else 
+    #else
 	   if (json_unlikely(value_t.empty())){
 		  _type = JSON_NULL;
 		  SetFetched(true);
@@ -149,7 +149,7 @@ internalJSONNode::internalJSONNode(const json_string & name_t, const json_string
 
 internalJSONNode::~internalJSONNode(void) json_nothrow {
     LIBJSON_DTOR;
-    #ifdef JSON_MUTEX_CALLBACKS 
+    #ifdef JSON_MUTEX_CALLBACKS
 	   _unset_mutex();
     #endif /*<- */
     DELETE_CHILDREN();
@@ -163,7 +163,7 @@ internalJSONNode::~internalJSONNode(void) json_nothrow {
 	   _string = JSONWorker::FixString(json_string(_string.begin() + 1, _string.end() - 1), STRING_ENCODED);
 	   #ifdef JSON_LESS_MEMORY
 		  JSON_ASSERT(_string.capacity() == _string.length(), JSON_TEXT("_string object too large 2"));
-	   #endif 
+	   #endif
     }
 
     void internalJSONNode::FetchNode(void) const json_nothrow {
@@ -188,10 +188,10 @@ internalJSONNode::~internalJSONNode(void) json_nothrow {
 void internalJSONNode::FetchNumber(void) const json_nothrow {
     #ifdef JSON_STRICT
 		_value._number = NumberToString::_atof(_string.c_str());
-    #else 
+    #else
 	   #ifdef JSON_UNICODE
 		  const size_t len = _string.length();
-		  #if defined(_MSC_VER) && defined(JSON_SAFE) 
+		  #if defined(_MSC_VER) && defined(JSON_SAFE)
 			 const size_t bytes = (len * (sizeof(json_char) / sizeof(char))) + 1;
 			 json_auto<char> temp(bytes);
 			 size_t res;
@@ -208,10 +208,10 @@ void internalJSONNode::FetchNumber(void) const json_nothrow {
 				_value._number = (json_number)0.0;
 				return;
 			 }
-		  #else 
+		  #else
 			 json_auto<char> temp(len + 1);
 			 size_t res = std::wcstombs(temp.ptr, _string.c_str(), len);
-		  #endif 
+		  #endif
 		  temp.ptr[res] = '\0';
 		  _value._number = (json_number)std::atof(temp.ptr);
 	   #else
@@ -243,7 +243,7 @@ void internalJSONNode::FetchNumber(void) const json_nothrow {
 			 default:
 				JSON_FAIL(JSON_TEXT("Fetching an unknown type"));
 				Nullify();
-		  #endif 
+		  #endif
 	   }
 	   fetched = true;
     }
@@ -277,12 +277,12 @@ void internalJSONNode::Set(const json_string & val) json_nothrow {
 	   _value._number = val;
 	   #if(defined(JSON_CASTABLE) || !defined(JSON_LESS_MEMORY) || defined(JSON_WRITE_PRIORITY))
 		  _string = NumberToString::_ftoa(val);
-	   #else 
+	   #else
 		  clearString(_string);
 	   #endif
 	   SetFetched(true);
     }
-#else 
+#else
     #if(defined(JSON_CASTABLE) || !defined(JSON_LESS_MEMORY) || defined(JSON_WRITE_PRIORITY))
 	   #define SET(converter, type)\
 		  void internalJSONNode::Set(type val) json_nothrow {\
@@ -324,7 +324,7 @@ void internalJSONNode::Set(const json_string & val) json_nothrow {
     SET_INTEGER(short)
     SET_INTEGER(int)
     SET_INTEGER(long)
-    #ifndef JSON_ISO_STRICT 
+    #ifndef JSON_ISO_STRICT
 	   SET_INTEGER(long long)
 	   SET_FLOAT(long double)
     #endif
@@ -348,10 +348,10 @@ bool internalJSONNode::IsEqualTo(const internalJSONNode * val) const json_nothro
     if (type() != val -> type()) return false;	 //aren't even same type
     if (_name != val -> _name) return false;  //names aren't the same
     if (type() == JSON_NULL) return true;  //both null, can't be different
-    #if !defined(JSON_PREPARSE) && defined(JSON_READ_PRIORITY) 
+    #if !defined(JSON_PREPARSE) && defined(JSON_READ_PRIORITY)
 	   Fetch();
 	   val -> Fetch();
-    #endif 
+    #endif
     switch (type()){
 	   case JSON_STRING:
 		  return val -> _string == _string;
@@ -604,7 +604,7 @@ internalJSONNode::operator bool() const json_nothrow {
 		  return (long)_value._number;
 	   #else /*<- else */
 		  JSON_ASSERT(type() == JSON_NUMBER, json_global(ERROR_UNDEFINED) + JSON_TEXT("(long long)"));
-		  #ifdef LONG_LONG_MAX			 
+		  #ifdef LONG_LONG_MAX
 			 JSON_ASSERT(_value._number < LONG_LONG_MAX, _string + json_global(ERROR_UPPER_RANGE) + JSON_TEXT("long long"));
 		  #elif defined(LLONG_MAX)
 			 JSON_ASSERT(_value._number < LLONG_MAX, _string + json_global(ERROR_UPPER_RANGE) + JSON_TEXT("long long"));
@@ -656,16 +656,23 @@ internalJSONNode::operator bool() const json_nothrow {
 	   #endif /*<- */
     }
 #endif /*<- */
-	
+
 	/*
 	 These functions are to allow allocation to be completely controlled by the callbacks
 	 */
-	
+
 #ifdef JSON_MEMORY_POOL /*-> JSON_MEMORY_POOL */
 	#include "JSONMemoryPool.h"
-	static memory_pool<INTERNALNODEPOOL> json_internal_mempool;
+	// http://www.parashift.com/c++-faq-lite/static-init-order.html (sections 10.14 - 10.17)
+	typedef memory_pool<INTERNALNODEPOOL> json_internal_mempool_t;
+	static json_internal_mempool_t &json_internal_mempool_f() {
+		static json_internal_mempool_t jip;
+		return jip;
+	}
+	#define json_internal_mempool         json_internal_mempool_f()
+	// ~ static memory_pool<INTERNALNODEPOOL> json_internal_mempool;
 #endif /*<- */
-	
+
 void internalJSONNode::deleteInternal(internalJSONNode * ptr) json_nothrow {
 	#ifdef JSON_MEMORY_POOL /*-> JSON_MEMORY_POOL */
 		ptr -> ~internalJSONNode();
@@ -677,7 +684,7 @@ void internalJSONNode::deleteInternal(internalJSONNode * ptr) json_nothrow {
 		delete ptr;
 	#endif /*<- */
 }
-	
+
 internalJSONNode * internalJSONNode::newInternal(char mytype) {
 	#ifdef JSON_MEMORY_POOL /*-> JSON_MEMORY_POOL */
 		return new((internalJSONNode*)json_internal_mempool.allocate()) internalJSONNode(mytype);
@@ -687,7 +694,7 @@ internalJSONNode * internalJSONNode::newInternal(char mytype) {
 		return new internalJSONNode(mytype);
 	#endif /*<- */
 }
-	
+
 #ifdef JSON_READ_PRIORITY /*-> JSON_READ_PRIORITY */
 internalJSONNode * internalJSONNode::newInternal(const json_string & unparsed) {
 	#ifdef JSON_MEMORY_POOL /*-> JSON_MEMORY_POOL */
@@ -698,7 +705,7 @@ internalJSONNode * internalJSONNode::newInternal(const json_string & unparsed) {
 		return new internalJSONNode(unparsed);
 	#endif /*<- */
 }
-	
+
 internalJSONNode * internalJSONNode::newInternal(const json_string & name_t, const json_string & value_t) {
 	#ifdef JSON_MEMORY_POOL /*-> JSON_MEMORY_POOL */
 		return new((internalJSONNode*)json_internal_mempool.allocate()) internalJSONNode(name_t, value_t);
@@ -708,9 +715,9 @@ internalJSONNode * internalJSONNode::newInternal(const json_string & name_t, con
 		return new internalJSONNode(name_t, value_t);
 	#endif /*<- */
 }
-	
+
 #endif /*<- */
-	
+
 internalJSONNode * internalJSONNode::newInternal(const internalJSONNode & orig) {
 	#ifdef JSON_MEMORY_POOL /*-> JSON_MEMORY_POOL */
 		return new((internalJSONNode*)json_internal_mempool.allocate()) internalJSONNode(orig);

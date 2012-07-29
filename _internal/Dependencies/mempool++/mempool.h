@@ -68,7 +68,7 @@
 	#else
 		#define pool_hot pool_nothrow
 	#endif
-	
+
 	#if (POOL_GCC_VERSION >= 29600)
 		#define pool_likely(x) __builtin_expect((long)((bool)(x)),1)
 		#define pool_unlikely(x) __builtin_expect((long)((bool)(x)),0)
@@ -76,7 +76,7 @@
 		#define pool_likely(x) x
 		#define pool_unlikely(x) x
 	#endif
-	
+
 	#define pool_nothrow throw()
 #else
 	#define pool_hot pool_nothrow
@@ -104,19 +104,19 @@ public:
 		get_instance()._free = freer;
 		get_instance()._realloc = reallocer;
 	}
-	
+
 	//allocates memory
-	static inline void * allocate(size_t size) pool_nothrow { 
+	static inline void * allocate(size_t size) pool_nothrow {
 		MEMPOOL_DEBUG("Returing malloced memory:" << size << " bytes");
-		return get_instance()._malloc(size); 
+		return get_instance()._malloc(size);
 	}
-	
+
 	//frees memory
-	static inline void deallocate(void * ptr) pool_nothrow { 
+	static inline void deallocate(void * ptr) pool_nothrow {
 		MEMPOOL_DEBUG("Freeing malloced memory: " << ptr);
 		get_instance()._free(ptr);
 	}
-	
+
 	static inline void * reallocate(void * ptr, size_t size) pool_nothrow {
 		MEMPOOL_DEBUG("Reallocating memory: " << ptr << " to " << size << " bytes");
 		return get_instance()._realloc(ptr, size);
@@ -127,18 +127,18 @@ private:
 		static mempool_callbacks _single(std::malloc, std::realloc, std::free);
 		return _single;
 	}
-				
+
 	//The constructor
 	inline mempool_callbacks(mallocer_t mallocer, reallocer_t reallocer, freer_t freer) :
 		_malloc(mallocer),
 		_free(freer),
 		_realloc(reallocer){
 	}
-	
+
 	//not copyable
 	mempool_callbacks & operator = (const mempool_callbacks & other);
 	mempool_callbacks(const mempool_callbacks & other);
-	
+
 	//member callbacks
 	mallocer_t _malloc;
 	reallocer_t _realloc;
@@ -163,25 +163,25 @@ public:
 	{
 		std::memset(used_start, 0, size * sizeof(bool));
 	}
-	
+
 	virtual ~memory_pool_no_fullflag(void){
 		if (_link){
 			_link -> ~memory_pool_no_fullflag();
 			mempool_callbacks::deallocate(_link);
 		}
 	}
-	
+
 	inline size_t load(void) const pool_nothrow {
 		return current;
 	}
-	
+
 	inline void * allocate(void) pool_hot {
 		if (void * res = allocate_nofallback()){
 			return res;
 		}
 		return _link_allocate();
 	}
-	
+
 	inline void deallocate(void * ptr) pool_hot {
 		if (memory_pool_no_fullflag<bytes, size> * container = contains(ptr)){
 			container -> deallocate_nofallback(ptr);
@@ -189,24 +189,25 @@ public:
 			mempool_callbacks::deallocate(ptr);
 		}
 	}
-	
+
 	void * allocate_nofallback() pool_hot {
+		MEMPOOL_ASSERT(runningPointer);
 		if (!(*runningPointer)) return _return_current();
 		if (++runningPointer >= used_end) runningPointer = used_start;
 		if (current < threshold){
 			//make sure it doesnt loop around infinity so point it to itself
-			const bool * position = runningPointer; 
+			const bool * position = runningPointer;
 			do {
 				if (!(*runningPointer)) return _return_current();
 				if (++runningPointer >= used_end) runningPointer = used_start;
 			} while (position != runningPointer);
 			MEMPOOL_ASSERT2(false, "Got to impossible code location");
 		}
-	
+
 		MEMPOOL_DEBUG("Returing null");
 		return NULL;
 	}
-	
+
 	void deallocate_nofallback(void * ptr) pool_hot {
 		MEMPOOL_ASSERT2(current, "current not positive");
 		--current;
@@ -216,15 +217,15 @@ public:
 		MEMPOOL_ASSERT2(used_start[((char*)ptr - memoryPool_start) / bytes], "Freeing " << ptr << " and it's already been freed");
 		used_start[(((char*)ptr - memoryPool_start) / bytes)] = false;
 	}
-	
+
 	inline memory_pool_no_fullflag<bytes, size> * contains(void * ptr) pool_hot {
 		if ((ptr >= memoryPool_start) && (ptr < memoryPool_end)) return this;
 		return (_link) ? _link -> contains(ptr) : NULL;
 	}
-	
+
 	#ifdef MEMPOOL_PERFORMANCE_DEBUGGING
 		const char * const getName(void){ return "memory_pool_no_fullflag"; }
-		
+
 		const char * getDepth(){
 			static const char * depths[15] = {
 				" ",
@@ -246,7 +247,7 @@ public:
 			if (depth > 14) return depths[14];
 			return depths[depth];
 		}
-		
+
 		std::string dump(void){
 			std::stringstream output;
 			output << getDepth() << getName() << "<" << bytes << ", " << size << ">: " << (void*)this << std::endl;
@@ -257,7 +258,7 @@ public:
 				output << "_";
 			}
 			output << "+" << std::endl << getDepth() << "|";
-			
+
 			//Fill in
 			int i;
 			for(i = 0; i < size; ++i){
@@ -276,11 +277,11 @@ public:
 					output << " ";
 				}
 			}
-			
+
 			for(; (i % 80) != 0; ++i){
 				output << "+";
 			}
-			
+
 			//-------
 			output << getDepth() << "+";
 			for(i = 0; i < 78; ++i){
@@ -297,7 +298,7 @@ protected:
 	//copy ctors and assignment operator
 	memory_pool_no_fullflag & operator = (const memory_pool_no_fullflag & other);
 	memory_pool_no_fullflag(const memory_pool_no_fullflag & other);
-	
+
 	inline void * _return_current(void) pool_hot {
 		*runningPointer = true;
 		++current;
@@ -311,7 +312,7 @@ protected:
 		if (++runningPointer >= used_end) runningPointer = used_start;
 		return memoryPool_start + ((pre - used_start) * bytes);
 	}
-	
+
 	void * _link_allocate(void) pool_nothrow {
 		if (depth >= MEMPOOL_FALLBACK_DEPTH) return mempool_callbacks::allocate(bytes);
 		if (!_link){
@@ -335,22 +336,22 @@ protected:
 template <size_t bytes, size_t size>
 class memory_pool : public memory_pool_no_fullflag<bytes, size> {
 public:
-	memory_pool<bytes, size>() : 
+	memory_pool<bytes, size>() :
 	memory_pool_no_fullflag<bytes, size>(),
 	_full(false){}
-	
+
 	virtual ~memory_pool(void){}
-	
+
 	inline void * allocate(void) pool_hot {
 		if (_full) return mempool_callbacks::allocate(bytes);
 		return memory_pool_no_fullflag<bytes, size>::allocate();
 	}
-	
+
 	inline void deallocate(void * ptr) pool_hot {
 		_full = false;
 		return memory_pool_no_fullflag<bytes, size>::deallocate(ptr);
 	}
-	
+
 	#ifdef MEMPOOL_PERFORMANCE_DEBUGGING
 		const char * const getName(void){ return "memory_pool"; }
 	#endif
@@ -358,43 +359,43 @@ private:
 	//copy ctors and assignment operator
 	memory_pool & operator = (const memory_pool & other);
 	memory_pool(const memory_pool & other);
-	
+
 	bool _full;
-	
+
 	template <typename T, size_t s> friend class object_memory_pool;
 };
 
 
 //A memory pool for a specific type of object
-#define new_object(pool, ctor) new (pool.allocate_noctor()) ctor  //allows user to call a specific ctor on the object [ new_object(mypool, T(x, y)) ] 
+#define new_object(pool, ctor) new (pool.allocate_noctor()) ctor  //allows user to call a specific ctor on the object [ new_object(mypool, T(x, y)) ]
 template <typename T, size_t size>
 class object_memory_pool {
-public:	
+public:
 	inline size_t load(void) const pool_nothrow {
 		return _pool.load();
 	}
-	
+
 	virtual ~object_memory_pool() pool_nothrow { } //so that it can be overloaded
-	
+
 	inline T * allocate(void) pool_hot { return new (_pool.allocate()) T(); }
 	inline void * allocate_noctor(void) pool_nothrow { return _pool.allocate(); }
-	
+
 	inline void deallocate(T * ptr) pool_hot {
 		ptr -> ~T();
 		_pool.deallocate(ptr);
 	}
-	
+
 	inline memory_pool<sizeof(T), size> * contains(T * ptr) const pool_hot {
-		return _pool.contains((void*)ptr);	
+		return _pool.contains((void*)ptr);
 	}
-	
+
 	inline T * alloc_nofallback() pool_hot {
 		if (void * res = _pool.allocate_nofallback()){
 			return new (res) T();
 		}
 		return NULL;
 	}
-	
+
 	inline void deallocate_nofallback(T * ptr) pool_hot {
 		ptr -> ~T();
 		_pool.deallocate_nofallback(ptr);
@@ -453,7 +454,7 @@ private:
 			mem_mapping.erase(ptr);\
 			mempool_callbacks::deallocate(ptr);\
 		}
-	
+
 	#define MEMPOOL_ANALYZERS(macro_count)\
 		inline size_t _max(size_t one, size_t two){ return (one > two) ? one : two; }\
 		void dump_total(size_t max, size_t sep = 16, size_t tlen = 30){\
@@ -582,7 +583,7 @@ private:
 	#define MEMPOOL_LOAD(number, code) inline size_t * load(void) const pool_nothrow { static size_t _load[number]; code return &_load[0]; }
 #endif
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2)>
 class bucket_pool_2 {
@@ -600,7 +601,7 @@ public:
 		2,
 		_load[0] = _pool1.load();
 		_load[1] = _pool2.load();
-	)	
+	)
 	MEMPOOL_DEALLOC_METHOD(
 		MEMPOOL_DEALLOC_CHECK(1)
 		MEMPOOL_DEALLOC_CHECK(2)
@@ -613,7 +614,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3)>
@@ -651,7 +652,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3),
@@ -695,7 +696,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3),
@@ -745,7 +746,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3),
@@ -801,7 +802,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3),
@@ -863,7 +864,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3),
@@ -931,7 +932,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3),
@@ -1005,7 +1006,7 @@ private:
 	)
 };
 
-template<	
+template<
 MEMPOOL_TEMPLATE_PAIR(1),
 MEMPOOL_TEMPLATE_PAIR(2),
 MEMPOOL_TEMPLATE_PAIR(3),

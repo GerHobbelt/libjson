@@ -3,19 +3,41 @@
 
 #if defined JSON_DEBUG
 	#ifndef JSON_STDERROR
-		static json_string last;
+
+		// http://www.parashift.com/c++-faq-lite/static-init-order.html (sections 10.14 - 10.17)
+		static json_string &last_f() {
+			static json_string last_s;
+			return last_s;
+		}
+		#define last             last_f()
+		// ~ static json_string last;
+
 		#ifdef JSON_LIBRARY
 			static void callback(const json_char * p){ last = p; }
 		#else
-			static void callback(const json_string & p){ last = p; }	
+			static void callback(const json_string & p){ last = p; }
 		#endif
 	#endif
 #endif
 
-const json_string fail_consta = JSON_TEXT("fail"); //should pass the same pointer all the way through, no copies
-const json_string null_consta = JSON_TEXT("");
+// http://www.parashift.com/c++-faq-lite/static-init-order.html (sections 10.14 - 10.17)
+static const json_string &fail_consta_f() {
+	static const json_string fca = JSON_TEXT("fail"); //should pass the same pointer all the way through, no copies
+	return fca;
+}
+#define fail_consta         fail_consta_f()
+// ~ const json_string fail_consta = JSON_TEXT("fail"); //should pass the same pointer all the way through, no copies
+
+// http://www.parashift.com/c++-faq-lite/static-init-order.html (sections 10.14 - 10.17)
+static const json_string &null_consta_f() {
+	static json_string nca = JSON_TEXT("");
+	return nca;
+}
+#define null_consta         null_consta_f()
+// ~ const json_string null_consta = JSON_TEXT("");
+
 #if defined JSON_DEBUG || defined JSON_SAFE
-	json_error_callback_t origCallbacka = NULL;
+	static json_error_callback_t origCallbacka = NULL;
 #endif
 
 void testJSONDebug_JSON_ASSERT::setUp(const std::string & methodName){

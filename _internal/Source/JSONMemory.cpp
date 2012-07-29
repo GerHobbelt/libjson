@@ -33,8 +33,15 @@
 
 #ifdef JSON_MEMORY_POOL
 	#include "JSONMemoryPool.h"
-    static bucket_pool_8<MEMPOOL_1, MEMPOOL_2, MEMPOOL_3, MEMPOOL_4, MEMPOOL_5, MEMPOOL_6, MEMPOOL_7, MEMPOOL_8> json_generic_mempool;
-    
+	// http://www.parashift.com/c++-faq-lite/static-init-order.html (sections 10.14 - 10.17)
+	typedef bucket_pool_8<MEMPOOL_1, MEMPOOL_2, MEMPOOL_3, MEMPOOL_4, MEMPOOL_5, MEMPOOL_6, MEMPOOL_7, MEMPOOL_8> json_generic_mempool_t;
+	static json_generic_mempool_t &json_generic_mempool_f() {
+		static json_generic_mempool_t jgm;
+		return jgm;
+	}
+	#define json_generic_mempool         json_generic_mempool_f()
+    // ~ static bucket_pool_8<MEMPOOL_1, MEMPOOL_2, MEMPOOL_3, MEMPOOL_4, MEMPOOL_5, MEMPOOL_6, MEMPOOL_7, MEMPOOL_8> json_generic_mempool;
+
 	//This class is only meant to initiate the mempool to start out using std::malloc/realloc/free
 	class mempool_callback_setter {
     public:
@@ -47,7 +54,14 @@
         inline mempool_callback_setter(const mempool_callback_setter & o);
         inline mempool_callback_setter & operator = (const mempool_callback_setter & o);
     };
-    static mempool_callback_setter __mempoolcallbacksetter;
+
+	// http://www.parashift.com/c++-faq-lite/static-init-order.html (sections 10.14 - 10.17)
+	static mempool_callback_setter &mempool_callback_setter_f() {
+		static mempool_callback_setter mcs;
+		return mcs;
+	}
+	#define __mempoolcallbacksetter         mempool_callback_setter_f()
+	// ~ static mempool_callback_setter __mempoolcallbacksetter;
 #endif
 
 #include "JSONSingleton.h"
