@@ -119,7 +119,7 @@ JSONNode JSONWorker::_parse_unformatted(const json_char * json, const json_char 
 
 
 #if defined(JSON_READ_PRIORITY) || defined(JSON_STREAM)
-	#if (JSON_READ_PRIORITY == HIGH) && (!(defined(JSON_LESS_MEMORY)))
+	#if (JSON_READ_PRIORITY == JSON_PRIO_HIGH) && (!(defined(JSON_LESS_MEMORY)))
 		#define FIND_NEXT_RELEVANT(ch, vt, po) JSONWorker::FindNextRelevant<ch>(vt, po)
 		template<json_char ch>
 		size_t JSONWorker::FindNextRelevant(const json_string & value_t, const size_t pos) json_nothrow {

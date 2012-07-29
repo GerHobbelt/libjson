@@ -68,7 +68,7 @@ JSONStream & JSONStream::operator =(const JSONStream & orig) json_nothrow {
     case right:\
 	   return json_string::npos;
 
-#if (JSON_READ_PRIORITY == HIGH) && (!(defined(JSON_LESS_MEMORY)))
+#if (JSON_READ_PRIORITY == JSON_PRIO_HIGH) && (!(defined(JSON_LESS_MEMORY)))
 	#define STREAM_FIND_NEXT_RELEVANT(ch, vt, po) FindNextRelevant<ch>(vt, po)
 	template<json_char ch>
 	size_t JSONStream::FindNextRelevant(const json_string & value_t, const size_t pos) json_nothrow {

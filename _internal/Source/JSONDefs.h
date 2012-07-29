@@ -18,6 +18,10 @@
 #define __LIBJSON_PATCH__ 1
 #define __LIBJSON_VERSION__ (__LIBJSON_MAJOR__ * 10000 + __LIBJSON_MINOR__ * 100 + __LIBJSON_PATCH__)
 
+#define JSON_PRIO_HIGH 3
+#define JSON_PRIO_MED  2
+#define JSON_PRIO_LOW  1
+
 #define JSON_NULL '\0'
 #define JSON_STRING '\1'
 #define JSON_NUMBER '\2'

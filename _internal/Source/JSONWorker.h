@@ -32,7 +32,7 @@ public:
     #endif
 
     #if defined(JSON_READ_PRIORITY) || defined(JSON_STREAM)
-		#if (JSON_READ_PRIORITY == HIGH) && (!(defined(JSON_LESS_MEMORY)))
+		#if (JSON_READ_PRIORITY == JSON_PRIO_HIGH) && (!(defined(JSON_LESS_MEMORY)))
 			template<json_char ch>
 			static size_t FindNextRelevant(const json_string & value_t, const size_t pos) json_nothrow json_read_priority;
 		#else

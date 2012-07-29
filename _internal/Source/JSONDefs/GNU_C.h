@@ -18,17 +18,17 @@
 	   #define json_malloc_attr json_nothrow __attribute__ ((malloc, hot))
 
 	   /* Can do priorities */
-	   #if (JSON_WRITE_PRIORITY == HIGH)
+	   #if (JSON_WRITE_PRIORITY == JSON_PRIO_HIGH)
 		  #define json_write_priority __attribute__ ((hot))
-	   #elif (JSON_WRITE_PRIORITY == LOW)
+	   #elif (JSON_WRITE_PRIORITY == JSON_PRIO_LOW)
 		  #define json_write_priority __attribute__ ((cold))
 	   #else
 		  #define json_write_priority
 	   #endif
 
-	   #if (JSON_READ_PRIORITY == HIGH)
+	   #if (JSON_READ_PRIORITY == JSON_PRIO_HIGH)
 		  #define json_read_priority __attribute__ ((hot))
-	   #elif (JSON_READ_PRIORITY == LOW)
+	   #elif (JSON_READ_PRIORITY == JSON_PRIO_LOW)
 		  #define json_read_priority __attribute__ ((cold))
 	   #else
 		  #define json_read_priority

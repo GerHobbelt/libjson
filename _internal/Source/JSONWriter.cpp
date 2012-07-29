@@ -47,7 +47,7 @@ extern bool used_ascii_one;
 				};
 				return cache[amount - 8];
 			}
-			#if JSON_WRITE_PRIORITY == HIGH
+			#if JSON_WRITE_PRIORITY == JSON_PRIO_HIGH
 				if (json_likely(amount < 24)){
 					static const json_string cache[] = {
 						json_string(JSON_TEXT("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t")),
