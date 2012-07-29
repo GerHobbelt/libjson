@@ -190,7 +190,7 @@
 
 /*
  *  JSON_READ_PRIORITY turns on libjson's reading capabilties.  Changing the value of the reader
- *  changes how libjson compiles, and how fast it will go when writing
+ *  changes how libjson compiles, and how fast it will go when reading
  */
 #define JSON_READ_PRIORITY HIGH
 
@@ -264,7 +264,7 @@
 
 
 /*
- *  JSON_INDEX_TYPE allows you th change the size type for the children functions. If this 
+ *  JSON_INDEX_TYPE allows you to change the size type for the children functions. If this 
  *  option is not used then unsigned int is used.  This option is useful for cutting down
  *  on memory, or using huge numbers of child nodes (over 4 billion)
  */
@@ -336,7 +336,7 @@
 /*
  *  JSON_SECURITY_MAX_NEST_LEVEL is a security measure added to make prevent against DoS attacks
  *  This only affects validation, as if you are worried about security attacks, then you are
- *  most certainly validating json before sending it to be parsed.  This option allows you to limitl how many
+ *  most certainly validating json before sending it to be parsed.  This option allows you to limit how many
  *  levels deep a JSON Node can go.  128 is a good depth to start with
  */
 #define JSON_SECURITY_MAX_NEST_LEVEL 128
