@@ -1,7 +1,8 @@
 # Compiled Object files
 *.slo
 *.lo
-*.o
+*.o  
+*.obj
 
 # Compiled Dynamic libraries
 *.so
@@ -10,3 +11,39 @@
 *.lai
 *.la
 *.a
+
+# editor backups
+*.bak
+*~
+		       
+# UNIX specific
+.libs
+.deps
+Makefile.in
+aclocal.m4
+autom4te.cache
+config.log
+config.status
+stamp-h1
+		       
+# Windows specific
+*.exe
+
+# MSVC specific
+*.user
+*.ncb
+*.psess
+*.vsp
+
+build/msvc2010/bin/
+build/msvc2010/obj/
+build/msvc2010/ipch/
+
+build/msvc2008/bin/
+build/msvc2008/obj/
+build/msvc2008/ipch/
+
+*.suo
+*.sdf
+*.opensdf
+
