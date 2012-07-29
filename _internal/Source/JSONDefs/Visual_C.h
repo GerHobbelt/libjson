@@ -3,7 +3,7 @@
 
 #ifdef _MSC_VER
 
-    #define json_deprecated(method, warning) __declspec(deprecated(warning)) method
+    #define json_deprecated(method, warning) /* __declspec(deprecated(warning)) */ method
 
     #define json_nothrow
     #define json_throws(x)
