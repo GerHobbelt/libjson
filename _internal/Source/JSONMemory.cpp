@@ -40,7 +40,7 @@
     public:
 		LIBJSON_OBJECT(mempool_callback_setter);
         inline mempool_callback_setter(void) json_nothrow {
-		`	LIBJSON_CTOR;
+			LIBJSON_CTOR;
             mempool_callbacks::set(std::malloc, std::realloc, std::free);
         }
     private:
