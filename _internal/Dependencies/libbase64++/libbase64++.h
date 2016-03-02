@@ -186,7 +186,7 @@ namespace libbase64 {
 			}
 			
 			//check to be sure there aren't odd characters or characters in the wrong places
-			size_t pos = encoded.find_first_not_of(libbase64_characters::getChar64<CHARTYPE>());
+			size_t pos = encoded.find_first_not_of(libbase64_characters::getChar64<CHARTYPE>(), 0, 64);
 			if (libbase64_unlikely(pos != STRINGTYPE::npos)){
 				LIBBASE64CODECOVERAGEBRANCH;
 				if (libbase64_unlikely(encoded[pos] != (CHARTYPE)'=')){
